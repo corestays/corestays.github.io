@@ -9,9 +9,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto
 header { border-bottom: 4px solid #cc0000; padding-bottom: 10px; margin-bottom: 16px; }
 h1 { font-size: 28px; margin: 0; line-height: 1.2; }
 .sub { color: #5a6069; font-size: 15px; margin-top: 4px; }
-.who { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
-.who div { flex: 1 1 260px; background: #f4f5f7; border-radius: 10px; padding: 12px 14px; font-size: 15px; }
-.who b { display: block; font-size: 16px; margin-bottom: 2px; }
 h2 { font-size: 21px; margin: 26px 0 8px; display: flex; align-items: center; gap: 10px; }
 h2 .n { background: #cc0000; color: #fff; border-radius: 50%; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; flex: none; }
 h3 { font-size: 14px; margin: 16px 0 4px; color: #cc0000; text-transform: uppercase; letter-spacing: 0.6px; }
@@ -34,14 +31,13 @@ li { margin-bottom: 8px; }
 </header>
 
 <div class="figs">
-  <figure><img src="img/nacs.jpg" alt="Tesla plug pulled straight out of the dock"><figcaption><b>Tesla / NACS:</b> pull the handle straight out and plug in (the adapter stays in the dock). When done, follow steps 3–6 below.</figcaption></figure>
-  <figure><img src="img/j1772.jpg" alt="Pressing the black button releases the handle with the J1772 adapter attached"><figcaption><b>Non-Tesla / J1772:</b> press the black button (blue arrow), then pull. The handle comes out with the gray J1772 adapter on it. Follow Part 1, then Part 2.</figcaption></figure>
+  <figure><img data-src="img/nacs.txt" alt="Tesla plug pulled straight out of the dock"><figcaption><b>Tesla / NACS:</b> pull the handle straight out and plug in (the adapter stays in the dock). When done, follow steps 3–6 below.</figcaption></figure>
+  <figure><img data-src="img/j1772.txt" alt="Pressing the black button releases the handle with the J1772 adapter attached"><figcaption><b>Non-Tesla / J1772:</b> press the black button (blue arrow), then pull. The handle comes out with the gray J1772 adapter on it. Follow Part 1, then Part 2.</figcaption></figure>
 </div>
 <p class="credit">Diagrams: Tesla</p>
 
 <h2><span class="n">1</span>Using the built-in J1772 adapter</h2>
 <h3>Remove</h3>
-
 <ol>
   <li>With the handle in its dock, <b>press the black button on the adapter</b> (where the handle meets the dock) and pull. The handle comes out with the J1772 adapter attached.</li>
   <li>Plug the adapter into your car's charge port.</li>
@@ -76,4 +72,12 @@ li { margin-bottom: 8px; }
   <p><b>Charge Your Other EV</b> (Tesla app steps for non-Tesla cars)<br><a href="https://energylibrary.tesla.com/docs/Public/Charging/WallConnector/EVinstructions/ChargeYourOtherEVinstructions.pdf">energylibrary.tesla.com/docs/Public/Charging/WallConnector/EVinstructions/ChargeYourOtherEVinstructions.pdf</a></p>
   <p><b>Troubleshooting a Wall Connector</b> (what the lights mean)<br><a href="https://www.tesla.com/support/charging/wall-connector/troubleshooting">tesla.com/support/charging/wall-connector/troubleshooting</a></p>
 </div>
+<script>
+document.querySelectorAll('img[data-src]').forEach(function (img) {
+  fetch(img.getAttribute('data-src')).then(function (r) { return r.text(); }).then(function (t) {
+    t = t.trim().replace(/~(.)(\d+)~/g, function (m, c, n) { return c.repeat(+n); });
+    img.src = 'data:image/jpeg;base64,' + t;
+  });
+});
+</script>
 </body></html>
